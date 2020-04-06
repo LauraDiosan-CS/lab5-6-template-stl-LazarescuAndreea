@@ -1,30 +1,18 @@
-﻿  magazin.cpp
-  main.cpp
-  repoSTL.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xstddef(127,22): error C2676: binary '<': 'const _Ty' does not define this operator or a conversion to a type acceptable to the predefined operator
-          with
-          [
-              _Ty=Magazin
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xstddef(126): message : while compiling class template member function 'bool std::less<Magazin>::operator ()(const _Ty &,const _Ty &) const'
-          with
-          [
-              _Ty=Magazin
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xutility(1469): message : see reference to function template instantiation 'bool std::less<Magazin>::operator ()(const _Ty &,const _Ty &) const' being compiled
-          with
-          [
-              _Ty=Magazin
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xmemory(1318): message : see reference to class template instantiation 'std::less<Magazin>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xmemory(1318): message : see reference to variable template 'const bool is_empty_v<std::less<Magazin> >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\set(54): message : see reference to class template instantiation 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>' being compiled
-          with
-          [
-              _Kty=Magazin,
-              _Pr=std::less<Magazin>,
-              _Alloc=std::allocator<Magazin>
-          ]
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(9): message : see reference to class template instantiation 'std::set<Magazin,std::less<Magazin>,std::allocator<Magazin>>' being compiled
+﻿  main.cpp
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+  repoFile.cpp
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+C:\Users\lazar\source\repos\magazin\magazin\repoFile.cpp(6,7): error C2760: syntax error: unexpected token '.', expected 'declaration'
+  service.cpp
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
   teste.cpp
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+  ui.cpp
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+  verify.cpp
   Generating Code...

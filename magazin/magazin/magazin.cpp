@@ -1,108 +1,120 @@
 #include "magazin.h"
 #include <cstring>
-#include <sstream>
+#include<iostream>
 using namespace std;
-
-Magazin::Magazin()
+Produs::Produs()
 {
 	this->nume = NULL;
-	this->pret = -1;
-	this->nr_exemplare = -1;
+	this->pret = NULL;
+	this->buc = NULL;
 }
-
-Magazin::Magazin(char* nume, int pret, int nr_exemplare)
+Produs::Produs(char* nume, double pret, int buc)
 {
 	this->nume = new char[strlen(nume) + 1];
 	strcpy_s(this->nume, 1 + strlen(nume), nume);
-
 	this->pret = pret;
-	this->nr_exemplare = nr_exemplare;
+	this->buc = buc;
 }
-
-Magazin::Magazin(const Magazin& m)
+Produs::Produs(const Produs& expence)
 {
-	this->nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, 1 + strlen(m.nume), nume);
-
-	this->pret = m.pret;
-	this->nr_exemplare = m.nr_exemplare;
+	this->nume = new char[strlen(expence.nume) + 1];
+	strcpy_s(this->nume, 1 + strlen(expence.nume), expence.nume);
+	this->pret = expence.pret;
+	this->buc = expence.buc;
 }
-
-char* Magazin::get_nume()
+Produs::~Produs()
 {
-	return nume;
+	if (this->nume)
+	{
+		free(this->nume);
+		this->nume = NULL;
+	}
 }
-
-int Magazin::get_pret()
+//Getters
+char* Produs::get_nume()
 {
-	return pret;
+	return this->nume;
 }
-
-int Magazin::get_nr_exemplare()
+double Produs::get_pret()
 {
-	return nr_exemplare;
+	return this->pret;
 }
-
-void Magazin::set_nume(const char* nume)
+int Produs::get_buc()
 {
-	if (this->nume) delete[]nume;
-	this->nume = new char[strlen(nume) + 1];
-	strcpy_s(this->nume, strlen(nume) + 1, nume);
+	return this->buc;
 }
-
-void Magazin::set_pret(int pret)
+//Setters
+void Produs::set_nume(char* new_nume)
 {
-	this->pret = pret;
+	if (this->nume)
+	{
+		delete[] this->nume;
+		this->nume = NULL;
+	}
+	this->nume = new char[strlen(new_nume) + 1];
+	strcpy_s(this->nume, 1 + strlen(new_nume), new_nume);
 }
-
-void Magazin::set_nr_exemplare(int nr_exemplare)
+void Produs::set_pret(double new_pret)
 {
-	this->nr_exemplare = nr_exemplare;
+	this->pret = new_pret;
 }
-
-Magazin::~Magazin()
+void Produs::set_buc(int new_buc)
 {
-	if (nume) delete[]nume;
-	nume = NULL;
-	pret = -1;
-	nr_exemplare = -1;
+	this->buc = new_buc;
 }
-
-Magazin& Magazin::operator=(const Magazin& m)
+Produs& Produs:: operator =(const Produs& expence)
 {
-	if (this == &m)return *this;
-	if (nume) delete[]nume;
-	nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, 1 + strlen(m.nume), nume);
-	pret = m.pret;
-	nr_exemplare = m.nr_exemplare;
+	this->set_nume(expence.nume);
+	this->set_pret(expence.pret);
+	this->set_buc(expence.buc);
 	return *this;
 }
-
-bool Magazin::operator==(const Magazin& m)
+/*bool Carte:: operator==(const Carte& s) {
+	return strcmp(this->nume, s.nume) == 0 && this->pret == s.pret && this->buc == s.buc;
+}*/
+bool Produs::operator==(const Produs& s) const
 {
-	return(strcmp(nume, m.nume) == 0) and (pret == m.pret) and (nr_exemplare == m.nr_exemplare);
+	return (strcmp(nume, s.nume) == 0);
 }
-
-
-ostream& operator<<(ostream& os, Magazin& m) {
-	os << m.get_nume() << " " << m.get_pret() << m.get_nr_exemplare() << endl;
+bool Produs::operator!=(const Produs& s) const
+{
+	return (strcmp(nume, s.nume) != 0);
+}
+bool Produs::operator<(const Produs& s) const
+{
+	return (strcmp(nume, s.nume) == -1);
+}
+bool Produs::operator<=(const Produs& s) const
+{
+	return ((strcmp(nume, s.nume) == 0) || (strcmp(nume, s.nume) == -1));
+}
+bool Produs::operator>(const Produs& s) const
+{
+	return (strcmp(nume, s.nume) == 1);
+}
+bool Produs::operator>=(const Produs& s) const
+{
+	return ((strcmp(nume, s.nume) == 0) || (strcmp(nume, s.nume) == 1));
+}
+std::ostream& operator <<(std::ostream& os, Produs expence)
+{
+	os << std::endl << "Nume: " << expence.nume << " Pret: " << expence.pret << " Numar exemplare: " << expence.buc << std::endl;
 	return os;
 }
-
-istream& operator>>(istream& is, Magazin& m)
+std::istream& operator >>(std::istream& is, Produs& s)
 {
-	cout << "Dati numele: ";
-	char* nume = new char[10];
+	cout << "Introduceti nume produs: ";
+	char* nume = new char[20];
 	is >> nume;
-	cout << "Dati pretul: ";
-	int pret;
-	cin >> pret;
-	cout << "Dati numarul exemplarelor: ";
-	int nr_exemplare;
-	cin >> nr_exemplare;
-	m.set_nume(nume);
-	m.set_pret(pret);
-	m.set_nr_exemplare(nr_exemplare);
+	cout << "Introduceti pret produs: ";
+	double pret;
+	is >> pret;
+	cout << "introduceti cantitate: ";
+	int buc;
+	is >> buc;
+	s.set_nume(nume);
+	s.set_pret(pret);
+	s.set_buc(buc);
+	delete[] nume;
 	return is;
 }
