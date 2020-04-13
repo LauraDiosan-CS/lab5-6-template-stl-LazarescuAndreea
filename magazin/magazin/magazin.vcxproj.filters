@@ -30,9 +30,6 @@
     <ClCompile Include="service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="verify.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="repoFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -53,11 +50,13 @@
     <ClInclude Include="ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="verifyy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="repoFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fis.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

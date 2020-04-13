@@ -1,9 +1,9 @@
 #include "ui.h"
-#include "verifyy.h"
 #include "repoSTL.h"
 #include <iostream>
 #include <string>
 #include <ctime>
+#include "teste.h"
 
 using namespace std;
 
@@ -42,126 +42,154 @@ void UI::add() {
 void UI::update()
 {
     char* nume = new char[0];
-    double pret;
-    int buc;
     char* newNume = new char[0];
     double newPret;
     int newBuc;
 
-    cout << "Dati nume produs: ";
+    cout << "Dati numele produsului de modificat: ";
     nume = allocate_memory();
-
-    cout << "Dati pret: ";
-    cin >> pret;
-    //cout << endl;
-
-    cout << "Dati numar exemplare produs: ";
-    cin >> buc;
-    cout << endl;
+    double pret = 0;
+    int buc = 0;
 
     cout << "Dati un nume produs dupa update: ";
     newNume = allocate_memory();
-
-    cout << "Dati pret: ";
+    cout << "Dati noul pret: ";
     cin >> newPret;
-    // cout << endl;
-
-    cout << "Dati numar exemplare produs: ";
+    cout << "Dati noul numar de exemplare: ";
     cin >> newBuc;
     cout << endl;
 
     service.updateS(nume, pret, buc, newNume, newPret, newBuc);
-    cout << "------Produs modificat cu succes------" << endl;
+    cout << "Produs modificat cu succes!" << endl;
 }
 
 void UI::deleteS()
 {
     char* nume = new char[0];
-    double pret;
-    int buc;
+    double pret = 0;
+    int buc = 0;
 
-    cout << "Dati un nume produs pentru stergere: ";
+    cout << "Dati numele produsului de sters: ";
     nume = allocate_memory();
 
-    cout << "Dati pret: ";
-    cin >> pret;
-    //cout << endl;
-
-    cout << "Dati numar exemplare produs: ";
-    cin >> buc;
-    cout << endl;
-
     service.delS(nume, pret, buc);
-    cout << "------Produs sters------" << endl << endl;
+    cout << "Produs sters!" << endl;
 }
 
-void UI::print() {
-
-    //int n = this->service.get_len();
+void UI::print()
+{
     set<Produs> all_elem = service.get_all();
     for (Produs b : all_elem)
-        cout << b << endl;
+        cout << b;
+    cout << endl;
 }
 
 void UI::cumparareProdus()
 {
+    int number_of_products, i, price = 0, number, len = 0, ok_product[100];
     char* nume = new char[0];
-    int buc;
-    cout << "Dati numele produsului pe care vreti sa il cumparati: ";
-    cin >> nume;
-    cout << "Dati numarul de exemplare pe care vreti sa le cumparati: ";
-    cin >> buc;
-    if (service.cumparare(nume, buc) == 0) cout << "Cumparare efectuata cu succes!";
-    else cout << "Nu exista in stoc atatea exemplare!";
-}
-
-void UI::run() {
-
-    string opt;
-    bool ok = true;
-    //Shop* undo_array = new Shop[0];
-
-    do {
-        cout << endl << "Alege o optiune: " << endl;
-        menu();
-        cout << "Optiunea este: ";
-        cin >> opt;
-
-        if (opt.size() == 1)
+    Produs products[100], results[100];
+    cout << " Cate produse vreti sa cumparati? ";
+    cin >> number_of_products;
+    for (i = 0; i < number_of_products; i++)
+    {
+        cout << endl << " Dati numele produsului: ";
+        nume = allocate_memory();
+        cout << " Cate bucati vreti sa cumparati? ";
+        cin >> number;
+        Produs product(nume, price, number);
+        products[i] = product;
+    }
+    service.cumparare(number_of_products, products, len, results, ok_product);
+    for (i = 0; i < len; i++)
+    {
+        Produs curentProduct = results[i];
+        if (curentProduct.get_pret() == 0)
         {
-            if (opt[0] == '1')
+            if (ok_product[i] == 0)
             {
-                this->add();
+                cout << endl << " Produsul nu a fost cumparat! " << endl;
             }
-            else
-                if (opt[0] == '2')
-                {
-                    this->print();
-                }
-                else
-                    if (opt[0] == '3')
-                    {
-                        this->update();
-                    }
-                    else
-                        if (opt[0] == '4')
-                        {
-                            this->deleteS();
-                        }
-                        else
-                            if (opt[0] == '5')
-                            {
-                                this->cumparareProdus();
-                            }
-                            if (opt[0] == 'x')
-                            {
-                                ok = false;
-                            }
-                            else
-                                cout << endl << "Invalid option!" << endl;
-
         }
         else
-            cout << endl << "Invalid option!" << endl;
-    } while (ok);
+        {
+            if (ok_product[i] == 1)
+            {
+                cout << "Produsul a fost cumparat!" << endl;
+            }
+        }
+    }
+
+}
+
+void UI::returnareProdus()
+{
+    int number_of_products, i, price = 0, number, lenght = 0, ok_product[100], ok_name[100];
+    char* name = new char[20];
+    Produs products[100], results[100];
+    cout << " Cate produse vreti sa returnati? ";
+    cin >> number_of_products;
+    for (i = 0; i < number_of_products; i++)
+    {
+        cout << endl << " Dati numele: ";
+        cin >> name;
+        cout << " Dati numarul de bucati: ";
+        cin >> number;
+        Produs product(name, price, number);
+        products[i] = product;
+    }
+
+    service.returnElem(number_of_products, products, lenght, results, ok_product, ok_name);
+    for (i = 0; i < lenght; i++)
+    {
+        Produs curentProduct = results[i];
+        if (curentProduct.get_pret() == 0)
+        {
+            if (ok_product[i] == 0)
+            {
+                cout << endl << " Produsul nu a fost returnat! " << endl;
+            }
+        }
+        else
+        {
+            if (ok_product[i] == 1)
+            {
+                cout << endl << " Produsul a fost returnat! " << endl;
+            }
+        }
+    }
+}
+
+void UI::run() 
+{
+    TestServiceTemplate test;
+    test.runTests();
+    string op;
+    bool ok = true;
+    while (ok)
+    {
+        cout << "Alege o optiune: " << endl;
+        std::cout << "x. Exit" << std::endl;
+        std::cout << "1. Adaugare" << std::endl;
+        std::cout << "2. Afisare" << std::endl;
+        std::cout << "3. Modificare" << std::endl;
+        std::cout << "4. Stergere" << std::endl;
+        std::cout << "5. Cumparare produs" << std::endl;
+        std::cout << "6. Returnare produs produs" << std::endl;
+        cout << "Optiunea este: ";
+        cin >> op;
+        if (op.size() == 1)
+        {
+            if (op[0] == '1') this->add();
+            else if (op[0] == '2') this->print();
+            else if (op[0] == '3') this->update();
+            else if (op[0] == '4') this->deleteS();
+            else if (op[0] == '5') this->cumparareProdus();
+            else if (op[0]=='6') this->returnareProdus();
+            else if (op[0] == 'x') ok = false;
+            else cout << "Invalid option!" << endl;
+        }
+        else
+            cout << "Invalid option!" << endl;
+    }
 }

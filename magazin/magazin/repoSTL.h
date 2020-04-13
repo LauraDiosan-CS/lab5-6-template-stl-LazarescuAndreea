@@ -5,8 +5,9 @@
 
 using namespace std;
 
-template <typename T>
-class Repo {
+template <class T>
+class Repo 
+{
 private:
 	std::set <T> array;
 public:
@@ -14,59 +15,61 @@ public:
 	~Repo();
 	void insert(T);
 	int get_len();
-	//void updateS(T, char*, double, int);
 	void updateS(T, T);
 	void delS(T);
-	int cumparare(T);
 	std::set<T> get_all();
+	int findElem(const T& s);
+	T elemAtPos(int i);
 };
-template <typename T>
+
+template <class T>
 Repo<T>::Repo() {
 }
-template <typename T>
+template <class T>
 Repo<T>::~Repo() {
 }
-template <typename T>
+template <class T>
 void Repo<T>::insert(T s) {
 	this->array.insert(s);
 }
-template <typename T>
+template <class T>
 int Repo<T>::get_len() {
 	return this->array.size();
 }
-template <typename T>
+template <class T>
 std::set<T> Repo<T>::get_all() {
 	return this->array;
 }
-template <typename T>
+template <class T>
 void Repo<T>::updateS(T s, T s1)
 {
-	/*set<T>::iterator it;
-	it = find(array.begin(), array.end(), s);
-	if (it != array.end())
-	{
-		/*(*it).set_nume(nume);
-		(*it).set_pret(pret);
-		(*it).set_buc(buc);
-	}*/
 	array.erase(s);
 	array.insert(s1);
 }
-template <typename T>
+template <class T>
 void Repo<T>::delS(T s)
 {
 	array.erase(s);
 }
 
-template <typename T>
-int Repo<T>::cumparare(T s)
+template<class T>
+int Repo<T>::findElem(const T& s)
 {
-	set<T>::iterator it;
-	it = find(array.begin(), array.end(), s);
+	typename set<T>::iterator it = std::find(array.begin(), array.end(), s);
 	if (it != array.end())
-	{
-		it->set_buc(it.buc - s.buc);
-		return 0;
-	}
+		return distance(array.begin(), it);
 	return -1;
+}
+
+template<class T>
+T Repo<T>::elemAtPos(int i)
+{
+	typename set<T>::iterator it;
+	int j = 0;
+	for (it = array.begin(); it != array.end(); ++it)
+	{
+		if (j == i)
+			return *it;
+		j++;
+	}
 }

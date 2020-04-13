@@ -28,12 +28,95 @@ void Service::delS(char* nume, double pret, int buc)
 	repo.delS(s);
 }
 
-int Service::cumparare(char* nume, int buc)
+void Service::cumparare(int& n, Produs products[], int& len, Produs results[], int ok_product[])
 {
-	Produs s(nume, 0, buc);
-	if (repo.cumparare(s) == 0)
+	int i, j;
+	for (i = 0; i < n; i++)
 	{
-		return 0;
+		Produs p = products[i];
+		double price = 0;
+		int ok = 0;
+		for (j = 0; j < get_len(); j++)
+		{
+			Produs crtProduct = repo.elemAtPos(j);
+			if ((strcmp(crtProduct.get_nume(), p.get_nume()) == 0) && (crtProduct.get_buc() >= p.get_buc()))
+			{
+				ok_product[i] = 1;
+				price = crtProduct.get_pret();
+				ok = 1;
+				crtProduct.set_buc(crtProduct.get_buc() - p.get_buc());
+				Produs newProduct(crtProduct.get_nume(), crtProduct.get_pret(), crtProduct.get_buc());
+				repo.updateS(crtProduct, newProduct);
+				break;
+			}
+
+			if ((strcmp(crtProduct.get_nume(), p.get_nume()) == 0) && (crtProduct.get_buc() < p.get_buc()))
+			{
+				ok_product[i] = 0;
+				price = 0;
+				ok = -1;
+				break;
+			}
+		}
+		if (ok == 1)
+		{
+			Produs yesProduct(p.get_nume(), price, p.get_buc());
+			results[len++] = yesProduct;
+		}
+
+		if (ok == -1)
+		{
+			Produs notProduct(p.get_nume(), 0, p.get_buc());
+			results[len++] = notProduct;
+		}
+
+		if (ok == 0)
+		{
+			Produs notProduct(p.get_nume(), 0, p.get_buc());
+			results[len++] = notProduct;
+			ok_product[i] = 0;
+		}
 	}
-	return -1;
+}
+
+void Service::returnElem(int& n, Produs products[], int& len, Produs results[], int ok_product[], int ok_name[])
+{
+	int i, j;
+	for (i = 0; i < n; i++)
+	{
+		Produs curentProduct = products[i];
+		double price = 0;
+		bool ok = 0;
+		for (j = 0; j < get_len(); j++)
+		{
+			Produs crtProduct = repo.elemAtPos(j);
+
+			if ((strcmp(crtProduct.get_nume(), curentProduct.get_nume()) == 0))
+			{
+				ok_product[i] = 1;
+				ok_name[i] = 1;
+				price = crtProduct.get_pret();
+				ok = 1;
+				crtProduct.set_buc(crtProduct.get_buc() + curentProduct.get_buc());
+				Produs newProduct(crtProduct.get_nume(), crtProduct.get_pret(), crtProduct.get_buc());
+				repo.updateS(crtProduct, newProduct);
+				break;
+			}
+		}
+
+		if (ok == 1)
+		{
+
+			Produs yesProduct(curentProduct.get_nume(), price, curentProduct.get_buc());
+			results[len++] = yesProduct;
+		}
+
+		if (ok == 0)
+		{
+			Produs notProduct(curentProduct.get_nume(), 0, curentProduct.get_buc());
+			results[len++] = notProduct;
+			ok_product[i] = 0;
+			ok_name[i] = 0;
+		}
+	}
 }

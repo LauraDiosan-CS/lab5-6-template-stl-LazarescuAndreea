@@ -144,7 +144,6 @@
     <ClCompile Include="service.cpp" />
     <ClCompile Include="teste.cpp" />
     <ClCompile Include="ui.cpp" />
-    <ClCompile Include="verify.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="magazin.h" />
@@ -153,7 +152,9 @@
     <ClInclude Include="service.h" />
     <ClInclude Include="teste.h" />
     <ClInclude Include="ui.h" />
-    <ClInclude Include="verifyy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fis.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

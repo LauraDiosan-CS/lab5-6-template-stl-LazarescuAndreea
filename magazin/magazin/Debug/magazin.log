@@ -1,18 +1,10 @@
-﻿  main.cpp
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+﻿  magazin.cpp
+  main.cpp
   repoFile.cpp
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
-C:\Users\lazar\source\repos\magazin\magazin\repoFile.cpp(6,7): error C2760: syntax error: unexpected token '.', expected 'declaration'
   service.cpp
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
   teste.cpp
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
+C:\Users\lazar\source\repos\magazin\magazin\teste.cpp(43,6): warning C4101: 'ok_prod': unreferenced local variable
   ui.cpp
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,19): error C2760: syntax error: unexpected token 'identifier', expected ';'
-C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(64,2): error C7510: 'iterator': use of dependent type name must be prefixed with 'typename'
-  verify.cpp
   Generating Code...
+C:\Users\lazar\source\repos\magazin\magazin\repoSTL.h(75): warning C4715: 'Repo<Produs>::elemAtPos': not all control paths return a value
+  magazin.vcxproj -> C:\Users\lazar\source\repos\magazin\Debug\magazin.exe
